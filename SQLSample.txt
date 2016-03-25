@@ -1,0 +1,439 @@
+-- SQL Script to create 3 x sample databses, populate with data and create stored procedure to backup atabases --
+
+
+create database TEST_001
+go
+use TEST_001
+go
+IF EXISTS(SELECT 1 FROM sys.tables WHERE object_id = OBJECT_ID('TestTable_001'))
+BEGIN;
+    DROP TABLE TestTable_001;
+END;
+GO
+
+CREATE TABLE TestTable_001 (
+    TestTable_001ID INTEGER NOT NULL IDENTITY(1, 1),
+    Test_001 VARCHAR(255) NULL,
+    Test_002 VARCHAR(255) NULL,
+    Test_003 VARCHAR(100) NULL,
+    Test_004 VARCHAR(255) NULL,
+    PRIMARY KEY (TestTable_001ID)
+);
+GO
+
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Tobias','Emerald, Gregory, Christen, Olivia','Indonesia','-0.33412316358525');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cullen','Abel, Martin, Colt, Cade','Dominican Republic','0.31479310588259');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Talon','Hakeem, Jolene, Wynter, Hoyt','Trinidad and Tobago','-0.19605943898952');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Jared','Sigourney, Anthony, Cheyenne, Hadassah','Czech Republic','0.33699815116408');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Vance','Fiona, Lesley, Adele, Jayme','Australia','0.21348885794698');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cain','Sylvia, Jaden, Ebony, Autumn','Turkmenistan','-0.13504435522664');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Castor','Gail, Charissa, Cathleen, Kirestin','Macao','0.48023011288807');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Elmo','Jamal, Nelle, Kiara, Igor','Austria','-0.18818118550708');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Blaze','Melissa, Xena, Boris, Signe','Australia','-0.034174228523133');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Erich','Travis, Melissa, Margaret, Upton','Armenia','-0.29064629851192');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Brett','Selma, Aimee, Deborah, Brett','Sierra Leone','-0.071322521096869');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Benedict','Martina, Inez, Macey, Ryder','Israel','0.061992435294497');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Zachary','Susan, Ishmael, Mark, Iliana','United States','0.20197907867681');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Steven','Jerome, Keith, Oliver, Leroy','Saint Lucia','0.17367301183936');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Gary','Marcia, Eric, Oren, Drake','Bahamas','0.30383379684176');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Colin','Astra, Aristotle, Sybill, Florence','Switzerland','0.0044704697881519');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Chaim','Prescott, Scott, Howard, Hammett','Virgin Islands, United States','0.19253827509267');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Malcolm','Flavia, Kenneth, Shafira, Xander','Hong Kong','-0.10350026729723');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('William','Octavius, Isabella, David, Ivan','Portugal','0.031027443441578');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Alexander','Karen, Mia, Violet, Darrel','New Zealand','-0.19818752315429');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Vladimir','Blake, Akeem, Dahlia, Zane','Cayman Islands','-0.42259444588172');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Evan','Xantha, Bevis, Delilah, Hanna','Iran','-0.22780684396694');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Ira','Rama, Rina, Jade, Magee','Turkey','-0.17617426427496');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Porter','Garrett, Jonas, Simone, Lenore','Iran','0.44929379989293');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Vernon','Cullen, Jacob, Kyra, Carolyn','Togo','-0.22868952851058');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Murphy','Fredericka, Riley, Keely, Kylan','Liechtenstein','-0.36107614410635');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Rajah','Yetta, Preston, Yoko, Dalton','Taiwan','-0.10579362111051');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Bruce','Callie, Unity, Dillon, Lionel','Kenya','-0.16355116828711');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Julian','Alana, Talon, Keiko, Sydney','Antigua and Barbuda','0.088260119508912');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Ian','Raja, Nevada, Upton, Garrison','Korea, North','0.41205781673891');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Steel','Shelby, Christen, Ila, Harper','Nauru','0.14258239382691');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Wylie','Nero, Brenda, Amal, Xanthus','Botswana','0.38458363533462');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Nissim','Adam, Patience, Jenna, Kennedy','Monaco','-0.29774877785412');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Lev','Addison, Hilel, Mason, Veda','United States Minor Outlying Islands','0.27785889781084');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Oscar','Kimberley, Lilah, Nora, Yael','Luxembourg','0.14932425682646');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Yoshio','Cherokee, Daquan, Clinton, Cassady','Korea, North','-0.45556192766851');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Igor','Eliana, Chanda, Emerald, Francesca','Chile','0.035864154025909');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Burton','Tyler, Cameron, Preston, Hayley','American Samoa','-0.14166560184733');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Mufutau','Garth, Nicholas, Rebekah, Zephania','Heard Island and Mcdonald Islands','0.26810316102531');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Lionel','Karen, Charissa, Brynne, Dahlia','Malawi','-0.075793791772091');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cain','Neville, Geraldine, Grace, Todd','Botswana','0.3188076908369');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Jermaine','Barry, Roanna, Ainsley, Harrison','Sri Lanka','-0.18178785518212');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Brody','Hilda, Angelica, Fiona, Carly','Cayman Islands','0.43985271345104');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Hector','Kimberly, Raymond, Ocean, Garrison','Algeria','-0.053952931484659');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Quentin','Summer, Emerson, Kennedy, Ahmed','Guadeloupe','0.1660277274405');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Jesse','Bruce, Dacey, Amethyst, Jordan','Peru','0.55495944840036');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Bruce','Freya, Dai, Halla, Geraldine','Mauritius','0.014624295152251');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Lee','Karly, Akeem, Lael, Scott','Liechtenstein','-0.64591021870432');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Castor','Shelley, Orla, Rhona, Lane','Algeria','0.31105155223988');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('August','Ursa, Whilemina, Susan, Janna','Moldova','0.018286097953698');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Wyatt','Carla, Berk, Mallory, Clio','Hungary','-0.19841806989872');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Kibo','Rahim, Uriel, Abraham, Cameran','Sao Tome and Principe','0.26154929910489');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Dean','Mercedes, Rebekah, Mariko, Damian','Nauru','-0.015993694079024');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Levi','David, Jesse, Kitra, Amethyst','Somalia','-0.2254418444733');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Anthony','Maite, Yoko, Lee, Kamal','Netherlands','0.41649717396271');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Hayes','Tyler, Logan, Marvin, Kimberley','Mali','0.20362047004328');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Reuben','Florence, Lesley, Carson, Freya','Denmark','0.22388002191927');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Orson','Whitney, Hop, Dai, Lev','Italy','0.11060711316146');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Lucius','Ian, Tanek, Gareth, Yael','Swaziland','0.057029675483778');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Vernon','Lisandra, Lana, Halee, Charlotte','Honduras','0.085395547646215');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Axel','Otto, Zeus, Ignatius, Hashim','Solomon Islands','-0.0032010703561688');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Judah','Maia, Stella, Samantha, Regina','Cyprus','-0.10394749957164');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Christian','Damon, Camille, Yuli, Jared','Mayotte','0.027488363791621');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Owen','Fletcher, Casey, Kaseem, Melodie','Netherlands','-0.38923752820222');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Bruno','Anthony, Paula, Alexis, India','Kazakhstan','0.019330957116259');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Valentine','Davis, Micah, Bevis, Mia','Bolivia','0.16973698878782');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Aquila','Thomas, Myles, Kathleen, Orli','Niue','-0.021856007495158');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Igor','Ethan, Nomlanga, Sydnee, Eleanor','Reunion','-0.074433987900648');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Carter','Tucker, Justina, Ria, Inez','New Caledonia','0.31896023424774');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Calvin','Tanisha, Curran, Nasim, Ulysses','United States','-0.27061945296023');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Malcolm','Alexis, Thomas, Emerald, Bruce','Nepal','0.063052473650664');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Keith','Randall, Jessica, Alyssa, Erin','Guadeloupe','0.16618656566121');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Clinton','Alice, Katelyn, Dane, Trevor','Luxembourg','-0.59442233455558');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Reed','Kiayada, Oliver, Upton, George','Indonesia','0.031676645568196');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cairo','Elmo, Amy, Felix, Yvette','Belize','-0.067581251537841');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Xander','Lucius, Zorita, Sydnee, Thane','Virgin Islands, British','-0.38807180068394');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Brent','Denise, Troy, Virginia, Emi','Kazakhstan','-0.18520045449821');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cody','Rudyard, Dean, Mohammad, Anjolie','Canada','-0.19129742255737');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Caleb','Jena, Noble, Colin, Hedwig','Laos','0.13849509079665');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Arden','Jocelyn, Germane, Iliana, Richard','Guinea-Bissau','0.27360812801736');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Erasmus','Ralph, Walker, Hedda, Melanie','Honduras','-0.054850337202551');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Sean','Brendan, Blaze, Irene, April','Macao','-0.33279257450707');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Graiden','Colorado, Curran, Timon, Tarik','Norfolk Island','-0.018758142456323');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Denton','Harriet, Phyllis, Randall, Lila','Bangladesh','-0.036008465428079');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Byron','Xerxes, Marah, Chester, Heidi','Sudan','-0.21637451068279');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Hashim','Reed, Connor, Jenna, Charity','Macedonia, the former Yugoslav Republic of','-0.38270245632744');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Talon','Noah, Aaron, Inez, Callie','Georgia','0.11177505498332');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Aristotle','Rinah, Drew, Arsenio, Nomlanga','Sudan','0.23799526467533');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cameron','Raymond, Knox, Bianca, Lance','Grenada','0.172759482667');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Caesar','Howard, Britanni, Tanner, Lois','Dominican Republic','0.1852636095393');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Jesse','Brynn, Felicia, Kirestin, Lucy','Ghana','-0.046950339161501');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Jamal','Veronica, Cole, Ingrid, Gwendolyn','Israel','0.39447096043248');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Fletcher','Cody, Caryn, Quynn, Dustin','Lebanon','-0.45172217228839');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Tanek','Maisie, Michael, Juliet, Oscar','United States','0.011078379194951');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Cullen','Zenaida, Maxwell, Raymond, TaShya','Northern Mariana Islands','-0.018215244171022');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Dante','Conan, Heidi, Maisie, Quyn','French Polynesia','-0.019239943147512');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Abel','Clementine, Vladimir, Gay, Mark','Brunei','-0.2806252270802');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Eagan','Burke, Kay, Steven, Todd','Pitcairn Islands','-0.19810176999007');
+INSERT INTO TestTable_001(Test_001,Test_002,Test_003,Test_004) VALUES('Ray','Signe, Inez, Imelda, Graham','Saint Martin','-0.0095127163198559');
+
+
+
+create database TEST_002
+go
+use TEST_002
+go
+
+IF EXISTS(SELECT 1 FROM sys.tables WHERE object_id = OBJECT_ID('TestTable_002'))
+BEGIN;
+    DROP TABLE TestTable_002;
+END;
+GO
+
+CREATE TABLE TestTable_002 (
+    TestTable_002ID INTEGER NOT NULL IDENTITY(1, 1),
+    Test_001A VARCHAR(255) NULL,
+    Test_002A VARCHAR(255) NULL,
+    Test_003A VARCHAR(100) NULL,
+    Test_004A VARCHAR(255) NULL,
+    PRIMARY KEY (TestTable_002ID)
+);
+GO
+
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Wesley','Raya, Eliana, Gay, Kenneth','Sao Tome and Principe','0.10918577746729');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Kevin','Kato, Jane, Gisela, Lynn','Nepal','0.13910768969346');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Barrett','Channing, Mona, Sheila, Florence','Vanuatu','-0.45210540933065');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Tate','Arthur, Madaline, Leila, Levi','Rwanda','0.36254499501472');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Coby','Iona, Hanna, Yoshi, Hanae','Bulgaria','-0.081868400875264');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Tyrone','Candice, Noah, Dai, Juliet','United Kingdom (Great Britain)','0.55690788882048');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dale','Britanni, Quyn, Echo, Joan','Somalia','-0.096751867336567');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Garth','Isaiah, Lamar, Anastasia, Emery','Guinea','-0.25634410513111');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Theodore','Aline, Wynter, Kylie, Macaulay','United Kingdom (Great Britain)','0.25489797231359');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Kareem','Portia, Zeus, Carissa, Palmer','Saudi Arabia','0.37015991151983');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Gabriel','Mona, Kelly, Reed, Travis','Belarus','0.27667692511193');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ali','Orlando, Carolyn, Rooney, Aileen','Argentina','-0.0022941826770113');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Macaulay','Hashim, Beck, Quon, Ira','Congo (Brazzaville)','0.36142623152825');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Gavin','Hanae, Illana, Maisie, Vivian','Oman','-0.24549285794045');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Alvin','Odessa, Ria, Charissa, Sydnee','Cocos (Keeling) Islands','-0.13065818074288');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Joshua','Wyoming, Craig, Beau, Piper','Martinique','0.097999891235094');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Brock','Rhea, Stacy, Emerald, Lunea','British Indian Ocean Territory','0.4428859388297');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Tanner','Rooney, Dorian, Amanda, Leigh','United States','0.26661128506933');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Nero','Deborah, Basia, Sigourney, Sydnee','Israel','0.0086899857578459');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Alexander','Ashton, Phillip, Nicole, Demetria','Tonga','-0.23902943014741');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Logan','Roth, Lillith, Jeanette, Tobias','Djibouti','-0.06583168759139');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Finn','Amanda, Camilla, Jermaine, Galena','Mozambique','0.042939278195441');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Philip','Ebony, Lawrence, Marah, Fletcher','Guatemala','0.26461643184966');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Callum','Porter, Ian, Iris, MacKensie','Greenland','0.25511412898506');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dorian','Kasimir, Hadassah, Curran, Craig','Korea, North','-0.081917479976948');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Lev','Jelani, Isabelle, Janna, Vivien','Sweden','0.027621362961746');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ferris','Kimberley, Hedy, Yen, Alexandra','Somalia','0.30318688268966');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Odysseus','Hayfa, Aiko, Fleur, Alexis','Saint Helena, Ascension and Tristan da Cunha','-0.10109739352709');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Erich','Hamilton, Benjamin, Thor, Roth','Latvia','0.26537133666041');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Neville','Eliana, Damian, Latifah, Karleigh','Congo, the Democratic Republic of the','-0.047812153049968');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Hiram','Hammett, Vanna, Martha, Serena','Congo (Brazzaville)','0.27423197404652');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Stewart','Melissa, Ignacia, Helen, Mari','Afghanistan','-0.087120057895026');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Hedley','Harper, Sean, Caleb, Nissim','British Indian Ocean Territory','-0.4860413462279');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Steel','Christine, Dara, Leila, Blaine','Laos','-0.32726257253136');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Arden','Faith, Geoffrey, Kelly, Tana','Finland','0.18555491675272');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Solomon','Beau, Dara, Uriah, Pandora','Zambia','0.35071232881667');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Barclay','Patience, Paula, Colorado, Cade','Seychelles','-0.041843060598735');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Garrison','Donovan, Quinn, Julie, Idona','Norway','0.0089319598394234');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ignatius','Thomas, Miranda, Lucius, Jonas','Guernsey','-0.45895124445643');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Quentin','Reese, Beck, Aileen, Frances','Oman','0.094149218074182');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Yuli','Fiona, Autumn, Brennan, Darius','Tanzania','-0.33576021237404');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Rogan','Alvin, Lacey, Wesley, Deirdre','Congo, the Democratic Republic of the','0.087129913073478');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Nathaniel','Ulric, Yetta, Blake, Ifeoma','Gibraltar','-0.023107796968646');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('George','Raymond, Erich, Desiree, Helen','Moldova','0.34550218526841');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ralph','Armand, Leo, Burton, Avye','Argentina','-0.14900710885943');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Tucker','Wynne, Daniel, Claudia, Axel','Brazil','0.042297617619397');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ira','Elijah, Kasper, Leslie, Dara','Angola','0.10518154372047');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Prescott','Lavinia, Nathan, Drew, Myra','Finland','0.40478738626971');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Blaze','Dorian, Taylor, Yoko, Kelsey','Palau','-0.19220393717473');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dorian','Lavinia, Gretchen, Gregory, Ocean','Sao Tome and Principe','-0.24018529104339');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Hedley','Shad, Hop, Kasimir, Amity','Ethiopia','-0.2100989956572');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Jackson','Audrey, Raven, Katell, Merritt','Afghanistan','0.31262064610606');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Alan','Xanthus, Lois, Zane, Darryl','Fiji','-0.098299767683703');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dolan','Uma, Lacy, Abel, Tatiana','Bhutan','0.23515382107836');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Berk','Minerva, Montana, Meredith, Alvin','France','0.03267278795989');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Gil','Finn, Darrel, Keaton, Sebastian','Bosnia and Herzegovina','-0.17163093491749');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dolan','Selma, Hadassah, Risa, Graham','Andorra','-0.54922587776875');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Allen','Maya, Adara, Irma, Marshall','Spain','-0.12506339925748');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Damian','Paula, Cathleen, Erasmus, Perry','Russian Federation','-0.23607032942417');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ashton','Anastasia, Paula, Azalia, Ocean','Hungary','-0.29859636221023');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Quinn','Sawyer, Blaine, Oren, Graham','Laos','0.056631879195888');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Vladimir','Harper, Raven, Hedley, Chelsea','Angola','0.13117844754519');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Burke','Alec, Richard, Isabella, Jaquelyn','Israel','0.25410360921158');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Hedley','Christopher, Chloe, Stacy, Judith','Peru','-0.31997131396697');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Vladimir','Thaddeus, Zia, Naomi, Zelenia','United Kingdom (Great Britain)','-0.10193469935085');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Nicholas','Jeremy, Kimberly, Leandra, Clementine','Korea, South','0.27926819232201');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Travis','Dakota, Emerald, Fallon, Magee','Macedonia, the former Yugoslav Republic of','-0.090744895082116');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Isaiah','April, Kamal, Devin, Juliet','Kazakhstan','0.13280358583205');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Xavier','Christine, Cecilia, Tiger, Arthur','Portugal','-0.30812965331317');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Mason','Adria, Lavinia, Shea, Nevada','Svalbard and Jan Mayen Islands','-0.14838388210339');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Keaton','Chadwick, Amena, Brendan, Prescott','Mauritius','-0.1390219099435');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Damian','Elaine, Jin, Forrest, Lillith','Anguilla','0.065831200534881');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Blake','Aquila, Cassandra, Fletcher, Florence','Slovenia','0.10885943188056');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Marvin','Althea, Stephanie, Jenette, Wallace','Finland','0.20855160369167');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Victor','Rhoda, Wesley, Oprah, Maryam','Cambodia','-0.12844304011754');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Macon','Conan, Sandra, Gavin, Galvin','Finland','0.11464136771004');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Kevin','Guy, Suki, Autumn, Nehru','Montenegro','-0.061088432260008');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ignatius','Kaitlin, Kenneth, Graham, Sasha','Cocos (Keeling) Islands','-0.20232876354613');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Solomon','Bruno, Teagan, Thomas, Louis','Antarctica','-0.32419564944808');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Scott','Plato, Martina, Rhiannon, Jocelyn','South Sudan','0.10203991684741');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dorian','Raphael, Kasimir, Eaton, Britanney','Jersey','0.2624995495831');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Silas','Oleg, Curran, Perry, Riley','Taiwan','-0.0067865415600629');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ulric','Zephr, Indigo, Quin, Gisela','Cuba','0.026780786751239');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Darius','Hayfa, Henry, Kelly, Emerson','New Caledonia','0.48307782286614');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Abdul','Cain, Quail, Ali, Vladimir','Haiti','-0.17963670792725');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Dale','Hedwig, Aline, Sharon, Moana','Germany','-0.013524927325656');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Cairo','Kimberley, TaShya, Vera, Emma','Poland','-0.017072238114579');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Michael','Keaton, Mufutau, Eleanor, Elton','Swaziland','-0.27541286778333');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Allistair','Ursa, Ina, Wesley, Jamal','Malta','-0.29072780717465');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Nolan','Selma, Stella, Octavius, Steel','Uzbekistan','-0.1348787205038');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Reuben','Ciaran, Coby, Abdul, Amy','Viet Nam','0.3609672014448');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Tarik','Plato, Ira, Amethyst, Nash','Cape Verde','0.53234100844208');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Omar','Kibo, Dexter, Ignacia, Scarlet','Rwanda','0.076888359653701');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Kaseem','Hayden, Jin, Tanisha, Garrett','Kazakhstan','-0.33875025115485');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Vincent','Emily, Randall, Jonas, Akeem','Nauru','0.29884461376871');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Macon','Zelda, Shellie, Karly, Zena','French Guiana','0.27469563476132');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Timothy','Cameron, Melinda, Seth, Ciaran','Hungary','0.44069776338138');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Ferdinand','Vielka, Tatyana, Shafira, Grace','Micronesia','0.20454787622232');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Oliver','Ruth, Brianna, Tamekah, Noelle','Hungary','0.49295033374161');
+INSERT INTO TestTable_002(Test_001A,Test_002A,Test_003A,Test_004A) VALUES('Howard','Fuller, Quamar, Lynn, Sacha','Spain','0.041923619444012');
+
+
+
+create database TEST_003
+go
+use TEST_003
+go
+
+
+IF EXISTS(SELECT 1 FROM sys.tables WHERE object_id = OBJECT_ID('TestTable_003'))
+BEGIN;
+    DROP TABLE TestTable_003;
+END;
+GO
+
+CREATE TABLE TestTable_003 (
+    Test_001AB VARCHAR(255) NULL,
+    Test_002AB VARCHAR(255) NULL,
+    Test_003AB VARCHAR(10) NULL,
+    Test_004AB UNIQUEIDENTIFIER NULL
+);
+GO
+
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Vera','Xandra','07588','449BC54E-D427-D02F-8726-594DBE557B4C');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Orli','Merritt','4363','D530B99F-65EB-B570-26E9-225C358C3570');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Quin','Rahim','53725','038B9FBC-5957-BB3F-0CB3-234CF5240800');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Phoebe','Alexis','47652-662','35777BB4-A17E-1FF2-C7D2-F44C5D120AD3');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Larissa','Dorian','09452','CF0A2FF7-B44D-6484-88A3-0AAD530FD489');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Whitney','Giacomo','0769','1D228DFE-00DD-5679-FB07-EEB60C475867');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Joan','Martina','R4C 9B5','A7582B9E-0049-6BEF-6C60-8DA31B3D535F');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Noelani','Josiah','9699SR','F81CE15B-C8D7-BBCF-0C9B-46251970AFBA');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Kylan','Shellie','7966QD','7FE94F3C-0DCC-849E-A7AC-2EC4E73D2E69');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Hermione','India','6286','644293AD-0DB6-69BA-CF0B-446505FC0216');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('April','Zahir','7451','9073B2FB-2AF6-0576-5367-5DEB7E5BCFC6');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Olympia','Connor','FG1 9MD','F91D7D46-2031-C911-3D7B-40EB0177A93A');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Rosalyn','Vladimir','8342','32DBA85D-282A-4376-74CD-DC38F7AEFCB2');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Mary','Cheryl','38120','317F5FED-ADD6-8051-EF21-67DF5DCB4167');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Dakota','Octavia','5441','A71ADF79-38FB-BD24-A8A3-BD161643B465');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Melinda','Bert','Xxxx','F15AE7F9-F9CA-7E18-56B0-A255A5E1D0BC');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jorden','Teegan','4689YT','F8698F53-735F-8BB8-5DEB-84991A4EB55B');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Stacy','Fleur','49583','A424D4E2-2A88-674B-D057-33669049F079');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Rina','Amber','M17 0KA','93CFAF20-5C0A-50BC-A068-34595D7EBDA4');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Holly','Rooney','5596','F5363E4E-3456-0DCC-AFA2-784C0770D76D');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Sara','Cedric','4897','41D1EABD-4D4D-21DA-8D80-45DE9D61C1E0');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Quin','Julie','9004XF','38E569D4-1D86-A608-C14D-040C72351F15');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Piper','Mona','2801MM','C30C07E4-C03E-5BDF-976B-1B62B74367E2');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Lesley','Brielle','I6 5DN','3949B010-3772-A219-D97D-E5F09E1B5849');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Suki','Brenna','63797','1970A263-7F50-23A8-1656-5CD6C2054836');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Larissa','Aline','37794','D15F2B4B-EBD8-295F-8ABD-EA5D2E3EDE7A');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Mary','Kevyn','50909','D1FB4DF2-AEA4-E7F1-FDF5-8954EAFA9647');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Alyssa','Julian','M8L 1A3','0DF659BA-75A2-F176-9B96-DC59CFABFACF');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Dahlia','Kirestin','61900','7CD35302-99E8-4A8E-6862-E48FC66E6C2E');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Marcia','Kirby','52604','EF075369-C562-C499-7716-909C1691C9AB');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Alexa','Amanda','62334','97A681F9-D948-10B0-F47B-35AE8222292C');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Nell','Chloe','Xxxx','F6329552-7134-4C17-0D28-1F11DA52FDDF');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Audra','Leslie','1855AZ','C56ED812-DE34-E067-2683-338535229335');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Cailin','Jakeem','2164EG','335C882B-ABEE-0874-F9A8-8E5B034944B7');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Callie','Dillon','M31 6TA','BC01705C-A905-1775-71C3-6ED9203A27CE');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Kelsie','Geoffrey','00196','5288CB08-9558-02D8-9B16-B0A08F23B2B0');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Piper','Chiquita','Xxxx','AA26BC64-C978-C292-6245-DFDDFEE2C8E7');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Sharon','Teegan','0958','EC439DA1-ADAC-3D08-B059-F47200083152');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Yvonne','Quail','G7 3TB','F5F3D24D-3C14-232C-8A48-47576595F65E');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Sasha','Raya','A6 1YX','18372968-E443-6EBD-65FE-45A66E3CB39C');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Josephine','Hilda','6295','A4D98A4C-4081-477E-ECCA-5249443641EE');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Zia','Raja','97483','B35D7E1B-1802-6E92-5791-24D50E04C938');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Mariko','Katelyn','37994','3D34F725-806C-DF05-B9BF-13F93F5ADB40');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Wilma','Hayden','3798','0AE9EDF8-BACB-341B-489C-1D1717306BF6');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Joy','Harding','13796','A93DE492-D2FE-0151-891E-414A04FC4C3F');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Sharon','Ayanna','84243','35D749C1-DB74-8BFE-387A-E02BB3172B45');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Glenna','Jacqueline','2900','A10D270E-C5FE-35AD-D43B-3152D2929E73');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Pearl','Quynn','L1X 4Z7','71AA7584-ACFD-D4FB-68D0-7437C5AC6B7D');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Octavia','Madaline','29731','F72742F9-676B-121C-AF8D-7C49367A6265');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Tatyana','Kiona','73385','1DDAA57F-EB55-5C8B-124E-1EBA0F9C4BB6');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Frances','Mollie','N6Y 6L4','F8098035-5F0C-7ADA-86D6-9593958F3243');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Demetria','Rosalyn','21907','41CAF244-C8E1-0E53-28E8-51D5A844FB83');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Shay','Hadley','20601','AE03C88E-6D8E-2DDD-50AA-E62176B6C737');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jocelyn','Dustin','3544','F0C0A7F0-9070-CDC3-1395-DC20D51774E6');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Phyllis','Blossom','9537','0C9CEAA4-C1C0-F35B-A3D0-3A7A6AFF15B2');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Melinda','Octavius','10059','1CA415F5-3F8D-7341-2337-E5934A3DFF70');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Hannah','Judith','8562','129B66B5-EC0F-1D76-01AB-95962A632584');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jescie','Keegan','88222','74781EF2-F9D9-F7F2-2554-BE930919440B');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Lydia','Adrienne','49629','E1212B3B-07BB-F30A-836D-01CC3AA7EE1D');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Odette','Tamekah','81716','FCEA7685-756B-48B6-5BFF-69C2C1175125');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jillian','Miriam','6013','8028F92B-BFDD-62F8-7DA6-22EE2C0EFA57');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Renee','Beau','48053','2398591C-6B39-E270-E8FD-245DC68D9EAC');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Beatrice','Willow','5560YP','8D0505BE-2260-B4A7-6ECD-C20F47C51169');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Samantha','Zephania','77092','C5FD5442-A541-E39D-3680-6456DE1DDAA9');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Tanya','Aphrodite','0508TV','1B621B78-8696-330D-3B38-BF050B01A5FC');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Beatrice','Seth','28272','5805D11E-3B43-7596-7BD3-6A76B078C5A1');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Stephanie','Cherokee','5041JM','2B90EFB6-666E-F339-404C-C14629465747');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jasmine','Sade','2246YS','23879B0E-2556-D855-A392-820BB21D894A');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Cecilia','Velma','82048','1351F131-FCA4-6718-EB94-60F8430E2B13');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Eden','Zelda','Xxxx','EE363761-922D-192E-1CD8-173E8F2870C6');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Rinah','Bethany','40114','3735158E-6115-3D3B-FBED-3E0C619C1984');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Alice','Belle','2511','220D1D1F-ED50-7111-A627-0592727A1EA3');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jennifer','Heather','52614','F7779883-EBBF-1428-6938-8DBA8CC0EE7E');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Cameran','Adrian','87451','A5D4D91E-8066-65B6-CA93-389FB2354B7F');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Daryl','Angela','5257','3C77416F-3A57-5D66-3A32-FF95072704B4');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Veda','Colby','06425-018','CDEB74CE-63FB-F3B1-F151-6BF1929EB5D8');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Shafira','Ashton','83957','4CE9E55D-6FF0-DB5A-3967-467DCB7DE4B3');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Leigh','Ursula','C35 2PZ','B4F385A6-16DF-42A8-3453-37098DF75A01');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Germaine','Colton','7514','382208C1-AB0F-25E0-B4B1-F922B8AF1A44');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Scarlett','Denton','4329','E9C8CF34-9354-8A7F-2BF6-1A57383CAA99');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Kylynn','Colorado','84069-780','A305B077-0D8A-20EA-3A5D-4F2A02056FE0');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Meghan','Brady','2484','835E19D3-4D55-3C42-D813-710E2BED9E81');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Raven','Leo','60794','BC1F8616-E296-4A46-524F-1C03A061ECE9');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Cara','Quintessa','Xxxx','2B137262-3C41-92A3-2358-DED907AC71E9');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('September','Aidan','58139','423650A7-AD2E-F537-214C-1C6E37DD4DA8');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Velma','Hanna','48978','BE23B078-BF9A-EFA8-C4FC-D5293A75F74B');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Rae','Audra','36687','93E368BC-8313-982A-0853-E813B80A5E7E');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Eugenia','Francesca','21512','E4923136-DC77-15EF-642E-2F29F83960E4');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Lavinia','Keaton','2361','4D8C1232-0778-EF18-E8F5-6614E4676A0B');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Tatiana','Mary','45457','975099EE-F55A-602F-8CB4-877CC902321D');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Jordan','Tatiana','46237','18251ADD-76D9-A0A7-A14E-101019A81503');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Daphne','Armando','70167','7C406D2C-E5B1-EBF5-8424-390C867CC4F3');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Amity','Stone','47763','034277C7-45EC-1B01-E152-989E85EA0AA0');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Fallon','Yvonne','2150','34D8378D-29B2-C1AC-F60C-F649DA5A4BE7');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Hadassah','Clio','1479','2C7FE1BD-8C98-3E20-97AD-39524567E6D1');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Ursula','Aline','37979','896B79C0-06E3-F364-9CC8-3996EA85673E');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Leandra','Roary','B0J 4V3','567FEC55-046B-FEF6-643C-C17B3A7266BB');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Imani','Vivian','08412','BACFE9BF-073B-F515-1D24-8E49F4F704DC');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Kathleen','Solomon','82429','06C85024-51C5-5A24-4D28-50D41D2706F0');
+INSERT INTO TestTable_003(Test_001AB,Test_002AB,Test_003AB,Test_004AB) VALUES('Lenore','Kenneth','8881IJ','836BBCB9-0C73-47A3-88F1-BBD2CA73E5C7');
+
+
+
+Create database ClientDatabases
+go
+
+IF EXISTS(SELECT 1 FROM sys.tables WHERE object_id = OBJECT_ID('Clients'))
+BEGIN;
+    DROP TABLE Clients;
+END;
+GO
+
+CREATE TABLE Clients (
+    DatabaseServer VARCHAR(255) NULL,
+    LinkName VARCHAR(255) NULL
+);
+GO
+
+use ClientDatabases
+
+go
+
+create procedure BackupToAzure as
+begin
+-- delete temp table if exists
+IF EXISTS
+( SELECT * FROM tempdb.dbo.sysobjects WHERE ID = OBJECT_ID('tempdb.dbo.#TablesToBackup'))
+BEGIN
+DROP TABLE #TablesToBackup
+END
+
+-- create temp table
+Create table #TablesToBackup(DBName nvarchar(100))
+
+-- populate
+insert into #TablesToBackup
+	select SUBSTRING(LinkName,CHARINDEX(':', LinkName)+1,100) as DBaseName from Clients
+
+declare @C cursor
+set @C = cursor for 
+	select * from  #TablesToBackup
+
+declare @F nvarchar(100)
+open @C
+while 0=0 
+	begin
+		fetch next from @C into @F
+		if not(@@FETCH_STATUS = 0) break
+			DECLARE @CMD NVARCHAR(300)
+			DECLARE @URL NVARCHAR(300)
+			DECLARE @Break NVARCHAR(5)
+			DECLARE @FileDate NVARCHAR(20)
+			SET QUOTED_IDENTIFIER OFF
+			Set @URL = 'https://MyBlobStorage.blob.core.windows.net/sqlbackup/' 
+			Set @Break = '_' 
+			Set @FileDate = Convert(varchar(8), GETDATE(), 112) + '.bak'
+			Set @Cmd = @URL + @F + @Break + @FileDate
+			BACKUP DATABASE @F
+			TO URL = @CMD WITH FORMAT, CREDENTIAL = 'MyCred', COMPRESSION ,STATS = 5
+			SET QUOTED_IDENTIFIER ON
+	end	
+close @C
+deallocate @C
+	
+DROP TABLE #TablesToBackup	
+
+
+end
+
+
